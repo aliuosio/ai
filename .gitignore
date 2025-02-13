@@ -1,0 +1,8 @@
+/app/*
+scraping
+searxng/
+src/.vscode/
+.vscode/
+src/*
+.idea/
+.env
