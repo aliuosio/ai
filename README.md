@@ -4,7 +4,7 @@ A Docker Compose setup for Open WebUI, Ollama and Fabric services with GPU suppo
 ## Setup
 
 1. Clone the project with Git `git clone https://github.com/aliuosio/ai.git`
-2. Navigate into the project directory `cd open-webui`
+2. Navigate into the project directory `cd ai`
 3. Run `docker compose up -d` to create and start your environment.
 
 ## Usage
