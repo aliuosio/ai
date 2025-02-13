@@ -1,5 +1,5 @@
 ## AI Project
-A Docker Compose setup for Open WebUI, Ollama, Python and Fabric services with GPU support.
+A Docker Compose setup for Open WebUI, Ollama and Fabric services with GPU support.
 
 ## Setup
 
