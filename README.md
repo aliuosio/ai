@@ -1,4 +1,4 @@
-## Open WebUI Project
+## AI Project
 A Docker Compose setup for running a Web UI, Ollama, Python, SearxNG, and Fabric services with GPU support.
 
 ## Setup
