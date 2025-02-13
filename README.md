@@ -3,7 +3,7 @@ A Docker Compose setup for running a Web UI, Ollama, Python, SearxNG, and Fabric
 
 ## Setup
 
-1. Clone the project with Git `git clone https://github.com/aliuosio/open-webui.git`
+1. Clone the project with Git `git clone https://github.com/aliuosio/ai.git`
 2. Navigate into the project directory `cd open-webui`
 3. Run `docker compose up -d` to create and start your environment.
 
