@@ -59,10 +59,12 @@ services:
     container_name: ${NAMESPACE}_fabric
     image: osioaliu/fabric:latest
     user: root
+    pull_policy: always
     ports:
       - "8080:8080"
     environment:
-      - GIN_MODE=release 
+      - GIN_MODE=release
+    working_dir: /go/bin
     volumes:
       - ./.env:/root/.config/fabric/.env:ro
       - ~/fabric:/go/bin/output
