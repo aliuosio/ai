@@ -52,10 +52,10 @@ services:
                 - gpu
 
   fabric:
-    build:
-       context: ./.docker/fabric
-       args:
-         GO_IMAGE_VERSION: ${GO_IMAGE_VERSION}
+    #build:
+    #   context: ./.docker/fabric
+    #   args:
+    #     GO_IMAGE_VERSION: ${GO_IMAGE_VERSION}
     container_name: ${NAMESPACE}_fabric
     image: osioaliu/fabric:latest
     user: root
