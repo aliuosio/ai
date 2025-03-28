@@ -38,8 +38,9 @@ services:
       - OLLAMA_KEEP_ALIVE=24h
       - NVIDIA_VISIBLE_DEVICES=all
       - CUDA_VISIBLE_DEVICES=0
-    runtime: nvidia
     tty: true
+    init: true
+    privileged: true
     volumes:
       - ~/.ollama:/root/.ollama
     deploy:
@@ -50,28 +51,3 @@ services:
               count: 1
               capabilities:
                 - gpu
-
-  fabric:
-    #build:
-    #   context: ./.docker/fabric
-    #   args:
-    #     GO_IMAGE_VERSION: ${GO_IMAGE_VERSION}
-    container_name: ${NAMESPACE}_fabric
-    image: osioaliu/fabric:latest
-    user: root
-    ports:
-      - "8080:8080"
-    environment:
-      - GIN_MODE=release
-    working_dir: /go/bin
-    volumes:
-      - ./.env:/root/.config/fabric/.env:ro
-      - ~/fabric:/go/bin/output
-    command: >
-      /bin/bash -c "
-        source /root/.bashrc &&
-        tail -f /dev/null
-      "
-    depends_on:
-      - ollama
-    tty: true
