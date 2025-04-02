@@ -13,11 +13,11 @@ services:
     restart: unless-stopped
     environment:
       - OLLAMA_BASE_URL=${OLLAMA_BASE_URL}
-      # - NVIDIA_VISIBLE_DEVICES=all # Removed, handled by deploy.resources
-      # - CUDA_VISIBLE_DEVICES=0 # Removed, handled by deploy.resources
-    # runtime: nvidia # Removed, handled by deploy.resources
+      - NVIDIA_VISIBLE_DEVICES=all
+      - CUDA_VISIBLE_DEVICES=0
+    runtime: nvidia
     volumes:
-      - webui-data:/app/backend/data # Use named volume pointing to host path
+      - ~/.webui:/app/backend/data
     deploy:
       resources:
         reservations:
@@ -36,13 +36,13 @@ services:
       - "host.docker.internal:host-gateway"
     environment:
       - OLLAMA_KEEP_ALIVE=24h
-      # - NVIDIA_VISIBLE_DEVICES=all # Removed, handled by deploy.resources
-      # - CUDA_VISIBLE_DEVICES=0 # Removed, handled by deploy.resources
+      - NVIDIA_VISIBLE_DEVICES=all
+      - CUDA_VISIBLE_DEVICES=0
     tty: true
     init: true
-    # privileged: true # Removed, deploy.resources should suffice for GPU
+    privileged: true
     volumes:
-      - ollama-data:/root/.ollama # Use named volume pointing to host path
+      - ~/.ollama:/root/.ollama
     deploy:
       resources:
         reservations:
@@ -51,17 +51,3 @@ services:
               count: 1
               capabilities:
                 - gpu
-
-volumes:
-  webui-data:
-    driver: local
-    driver_opts:
-      type: 'none'
-      o: 'bind'
-      device: '~/.webui'
-  ollama-data:
-    driver: local
-    driver_opts:
-      type: 'none'
-      o: 'bind'
-      device: '~/.ollama'
