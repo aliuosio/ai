@@ -3,7 +3,7 @@ services:
   open-webui:
     container_name: ${NAMESPACE}_open-webui
     image: ghcr.io/open-webui/open-webui:latest-cuda
-    pull_policy: if_not_present # Changed from always
+    pull_policy: always
     depends_on:
       - ollama
     ports:
@@ -30,7 +30,7 @@ services:
   ollama:
     container_name: ${NAMESPACE}_ollama
     image: ollama/ollama:latest
-    pull_policy: if_not_present # Changed from always
+    pull_policy: always
     restart: unless-stopped
     extra_hosts:
       - "host.docker.internal:host-gateway"
