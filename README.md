@@ -1,5 +1,5 @@
 ## AI Project
-A Docker Compose setup for Open WebUI, Ollama and Fabric services with GPU support.
+A Docker Compose setup for Open WebUI and Ollama services with GPU support.
 
 - **webui**: This is the Web UI component of the project. It is available on port 3000 of the host and depends on the Ollama service.
 - **ollama**: This is the Ollama service, which is required by the webui.
