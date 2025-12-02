@@ -2,7 +2,7 @@
 services:
   
 
-  ollama:G
+  ollama:
     image: alpine/ollama:latest
     container_name: ${NAMESPACE}_ollama
     ports:
