@@ -1,4 +1,26 @@
+
 services:
+  
+
+  ollama:G
+    image: alpine/ollama:latest
+    container_name: ${NAMESPACE}_ollama
+    ports:
+      - "11434:11434"
+    env_file: .env
+    tty: true
+    init: true
+    pull_policy: always
+    volumes:
+      - ~/.ollama:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities:
+                - gpu
 
   open-webui:
     container_name: ${NAMESPACE}_open-webui
@@ -10,66 +32,15 @@ services:
       - "3000:8080"
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    restart: unless-stopped
     env_file:
       - .env  
-    runtime: nvidia
     volumes:
       - ~/.webui:/app/backend/data
     deploy:
       resources:
         reservations:
           devices:
-            - driver: ${OLLAMA_GPU_DRIVER-nvidia}
+            - driver: nvidia
               count: 1
               capabilities:
                 - gpu
-
-  ollama:
-    container_name: ${NAMESPACE}_ollama
-    image: ollama/ollama:latest
-    pull_policy: always
-    restart: unless-stopped
-    ports:
-      - "11434:11434"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    env_file:
-      - .env
-    tty: true
-    init: true
-    privileged: true
-    volumes:
-      - ~/.ollama:/root/.ollama
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: ${OLLAMA_GPU_DRIVER-nvidia}
-              count: 1
-              capabilities:
-                - gpu
-
-  python:
-    image: osioaliu/python_rust:${PY_VERSION}
-    container_name: ${NAMESPACE}_python
-    build: 
-     context: ./.docker/python
-     dockerfile: Dockerfile 
-     args:
-       PY_VERSION: ${PY_VERSION} 
-    #pull_policy: always
-    env_file:
-      - .env
-    command: "tail -f /dev/null"
-    working_dir: /usr/src
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: ${OLLAMA_GPU_DRIVER-nvidia}
-              count: 1
-              capabilities:
-                - gpu
-    volumes:
-      - ./src:/usr/src
